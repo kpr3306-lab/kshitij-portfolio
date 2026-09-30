@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kshitij — Personal Portfolio</title>
+<meta name="description" content="Kshitij, B.Tech Data Science student at MPSTME, NMIMS. Cars, tech and sketching.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="bar"></div><div id="glow"></div>
+
+<nav aria-label="Sections">
+  <a href="#about">About</a><a href="#skills">Skills</a><a href="#projects">Projects</a>
+  <a href="#creative">Creative</a><a href="#social-service">Social</a><a href="#contact">Contact</a>
+  <button id="theme" aria-label="Toggle light and dark theme">☾</button>
+</nav>
+
+<div class="wrap">
+<header class="hero" id="top">
+  <canvas id="scope" aria-hidden="true"></canvas>
+  <svg class="car" viewBox="0 0 600 220" aria-hidden="true">
+  <path class="draw" pathLength="1" d="M24 168 L34 146 Q60 140 118 132 L182 90 Q200 78 228 76 L352 76 Q384 78 404 98 L440 128 Q516 134 566 150 L576 168"/>
+  <path class="draw" pathLength="1" style="animation-delay:.5s" d="M196 100 L226 84 L300 84 L300 128 L168 128 Z"/>
+  <path class="draw" pathLength="1" style="animation-delay:.7s" d="M312 84 L352 84 Q372 86 386 102 L400 128 L312 128 Z"/>
+  <path class="draw" pathLength="1" style="animation-delay:.9s" d="M24 168 H88 M172 168 H428 M512 168 H576 M88 168 A42 42 0 0 1 172 168 M428 168 A42 42 0 0 1 512 168"/>
+  <path class="draw" pathLength="1" style="animation-delay:1.1s" d="M540 148 L572 144 M60 146 L36 140 M312 128 V96"/>
+  <g transform="translate(130 168)"><g class="wheel"><circle class="draw" pathLength="1" style="animation-delay:1.3s" r="32"/><circle r="7"/><path d="M0 -30 V30 M-30 0 H30 M-21 -21 L21 21 M21 -21 L-21 21"/></g></g>
+  <g transform="translate(470 168)"><g class="wheel"><circle class="draw" pathLength="1" style="animation-delay:1.3s" r="32"/><circle r="7"/><path d="M0 -30 V30 M-30 0 H30 M-21 -21 L21 21 M21 -21 L-21 21"/></g></g>
+  <path class="road" d="M0 204 H600"/>
+</svg>
+  <div class="hero-top">
+    <div class="avatar">
+      <img src="photo.jpg" alt="Kshitij" onerror="this.style.display='none';this.nextElementSibling.style.display='grid';">
+      <div class="avatar-fallback">K</div>
+    </div>
+    <h1 aria-label="Kshitij" id="name"></h1>
+  </div>
+  <p class="type" aria-live="off"><span id="typed"></span><i></i></p>
+  <p class="role">B.Tech Data Science student at MPSTME, NMIMS. I like cars, tech, and making things — from ML models and embedded systems to sketches, 3D models, and the occasional late-night idea that turns into a project.</p>
+  <div class="readout" id="readout"><span>Sensor reading</span><b id="temp">24°</b><em id="state">Normal</em></div>
+  <p class="hint">Move your pointer up and down. Push the reading past the line and see what happens to the waveform graph.</p>
+</header>
+</div>
+
+<div class="marquee" aria-hidden="true"><div id="ticker"></div></div>
+
+<div class="wrap">
+  <section id="about" class="reveal">
+    <h2>About me</h2>
+    <p class="lead">I'm someone who likes understanding how things work, and then trying to build them myself.</p>
+    <p>I'm studying Data Science, but my interests have never stayed inside one box. I enjoy working with machine learning and AI, getting my hands dirty with ESP32s and sensors, experimenting with software, and figuring out how all of these pieces can work together in something practical.</p>
+    <p>Outside academics, cars and technology are probably my two biggest obsessions. I enjoy driving, gaming, listening to music and podcasts, reading, playing guitar, swimming, and sketching. I also like making things just for the sake of making them, from small DIY projects and 3D models to random ideas that I decide to try out.</p>
+    <p>I'm naturally a little on the quiet and shy side, but I'm straightforward once I get comfortable. I value being punctual, understanding people, and keeping things peaceful. I'm also pretty patient, sometimes probably more patient than I should be.</p>
+    <p>I don't always have everything figured out before I start. A lot of my projects begin with a simple "what if I try this?" and go from there.</p>
+  </section>
+
+  <section id="hobbies" class="reveal">
+    <h2>Outside the code</h2>
+    <div class="hob-grid" id="hobGrid"></div>
+  </section>
+
+  <section id="skills" class="reveal">
+    <h2>Skills and interests</h2>
+    <div class="skill-grid" id="skillGrid"></div>
+  </section>
+
+  <section id="projects">
+    <h2 class="reveal">Selected projects</h2>
+    <div id="projList"></div>
+  </section>
+
+  <section id="creative">
+    <h2 class="reveal">Creative corner</h2>
+    <p class="reveal">Things I make just for the sake of making them.</p>
+    <div class="sk-grid" id="skGrid"></div>
+  </section>
+
+  <section id="social-service" class="reveal">
+    <h2>Social service</h2>
+    <div class="social">
+      <h3>Maratha Life Foundation</h3>
+      <p>Volunteering and social-service work with the Maratha Life Foundation.</p>
+      <div class="mlf-gallery">
+        <figure><img src="mlf-1.jpg" alt="Maratha Life Foundation social service activity" onerror="this.parentNode.style.display='none'"></figure>
+        <figure><img src="mlf-2.jpg" alt="Maratha Life Foundation social service activity" onerror="this.parentNode.style.display='none'"></figure>
+        <figure><img src="mlf-3.jpg" alt="Maratha Life Foundation social service activity" onerror="this.parentNode.style.display='none'"></figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="coursework" class="reveal">
+    <h2>Coursework and academic work</h2>
+    <ul class="course">
+      <li>Data Science and machine-learning coursework involving regression, statistical modelling and data mining</li>
+      <li>Full-stack web development, from front-end fundamentals to Django back-end development</li>
+      <li>Data mining: market basket analysis and association-rule metrics</li>
+      <li>Interior Design open elective: wedding-clothing retail space design with SVG floor plans and a formatted report</li>
+      <li>Management Accounting for Engineers: costing, P/V ratios and break-even analysis</li>
+    </ul>
+  </section>
+
+  <section id="contact" class="reveal">
+    <h2>Contact</h2>
+    <p>Interested in a project, collaboration or just want to say hello?</p>
+    <div class="contact-links">
+      <a class="btn mag" href="mailto:kshitijrane3306@gmail.com">Email me</a>
+      <a class="btn mag" href="https://github.com/kpr3306-lab" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a class="btn mag" href="https://www.linkedin.com/in/kshitij-rane-0b077b43b/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    </div>
+  </section>
+
+  <footer>
+    <div>Kshitij · MPSTME, NMIMS</div>
+    <div>Cars · Tech · Sketching</div>
+  </footer>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
