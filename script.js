@@ -19,11 +19,21 @@ const projects=[
 $('#skillGrid').innerHTML=skills.map(([c,i])=>`<div class="skill reveal"><span class="cat">${c}</span><div class="chips">${i.split(',').map(x=>`<span>${x}</span>`).join('')}</div></div>`).join('');
 $('#projList').innerHTML=projects.map(p=>`<article class="proj reveal"><h3>${p[0]}${p[4]?'<span class="badge">Ongoing</span>':''}</h3><span class="tag">${p[1]}</span><p>${p[2]}</p>${p[3].length?`<div class="btns">${p[3].map(([l,u,k])=>`<a class="btn mag ${k||''}" href="${u}" target="_blank" rel="noopener noreferrer">${l} ↗</a>`).join('')}</div>`:''}</article>`).join('');
 const tk=["TinyML","ESP32-S3","Regression","RAG","Edge AI","Django","Monte Carlo","Streamlit","TensorFlow","IoT","NLP","Markov chains"];
-$('#ticker').innerHTML=[...tk,...tk].map(t=>`<span>${t} ✦</span>`).join('');
+$('#ticker').innerHTML=[...tk,...tk].map(t=>`<span>${t}</span>`).join('');
 
-const hobs=[["🎸","Guitar"],["🏊","Swimming"],["🎧","Music & podcasts"],["📚","Reading"],["✏️","Sketching"],["🧩","DIY & crafts"],["🖥️","3D modelling"],["🎮","Gaming"]];
-$('#hobGrid').innerHTML=`<div class="hob car reveal" style="display:flex;gap:20px;align-items:center"><svg class="gauge" viewBox="0 0 120 70" aria-hidden="true"><path d="M10 62 A50 50 0 0 1 110 62"/><line class="needle" x1="60" y1="62" x2="60" y2="20"/></svg><div><b>🚗 Cars & driving</b><small>One of my two biggest obsessions, right next to technology.</small></div><div class="roadline"></div></div>`+hobs.map(([e,l])=>`<div class="hob reveal"><span>${e}</span>${l}</div>`).join('');
-const crafts=[["diy-wall-hanging.jpg","DIY wall hanging made out of waste","-1.8deg","🧵"],["karambit.jpg","Call of Duty inspired karambit","1.2deg","🔪"],["low-poly-parrot.jpg","Low poly parrot","-1deg","🦜"]];
+const ico={
+guitar:'<path d="M19 13 L27 5 M25 3 L29 7"/><circle cx="10" cy="22" r="6"/><circle cx="15" cy="17" r="4.5"/><circle cx="11" cy="21" r="1.6"/>',
+swim:'<circle cx="21" cy="9" r="2.5"/><path d="M6 19 Q14 6 21 14"/><g class="w"><path d="M-6 24 q3 -4 6 0 t6 0 t6 0 t6 0 t6 0 t6 0"/><path d="M-6 29 q3 -4 6 0 t6 0 t6 0 t6 0 t6 0 t6 0"/></g>',
+music:'<path d="M5 20 V16 a11 11 0 0 1 22 0 V20"/><rect x="4" y="18" width="5" height="9" rx="2"/><rect x="23" y="18" width="5" height="9" rx="2"/><g class="eq"><path d="M13 23 V18 M16 23 V14 M19 23 V19"/></g>',
+read:'<path d="M16 8 C12 5 7 5 3 7 V25 C7 23 12 23 16 26 C20 23 25 23 29 25 V7 C25 5 20 5 16 8 Z M16 8 V26"/>',
+sketch:'<path d="M6 24 L7 19 L21 5 L25 9 L11 23 Z M18 8 L22 12"/><path class="sq" d="M4 29 q4 -3 8 0 t8 0 t8 0"/>',
+diy:'<circle cx="8" cy="8" r="3.5"/><circle cx="8" cy="24" r="3.5"/><path d="M10.5 10.5 L28 22 M10.5 21.5 L28 10"/>',
+cad:'<path d="M16 3 L28 9.5 V22.5 L16 29 L4 22.5 V9.5 Z M4 9.5 L16 16 L28 9.5 M16 16 V29"/>',
+game:'<path d="M9 11 H23 a6 6 0 0 1 6 6 v3 a3.5 3.5 0 0 1 -6 2 l-2 -3 H11 l-2 3 a3.5 3.5 0 0 1 -6 -2 v-3 a6 6 0 0 1 6 -6 Z M10 14.5 v5 M7.5 17 h5"/><circle cx="21.5" cy="16" r="1.3"/><circle cx="24.5" cy="18.5" r="1.3"/>'};
+const hobs=[["guitar","Guitar"],["swim","Swimming"],["music","Music & podcasts"],["read","Reading"],["sketch","Sketching"],["diy","DIY & crafts"],["cad","3D modelling"],["game","Gaming"]];
+$('#hobGrid').innerHTML=`<div class="hob drive reveal"><svg class="gauge" viewBox="0 0 120 70" aria-hidden="true"><path d="M10 62 A50 50 0 0 1 110 62"/><line class="needle" x1="60" y1="62" x2="60" y2="20"/></svg><div><b>Cars & driving</b><small>One of my two biggest obsessions, right next to technology.</small></div><div class="roadline"></div></div>`+hobs.map(([k,l])=>`<div class="hob reveal"><svg class="ico i-${k}" viewBox="0 0 32 32" aria-hidden="true">${ico[k]}</svg>${l}</div>`).join('');
+$$('.ico path,.ico circle,.ico rect').forEach(e=>e.setAttribute('pathLength','1'));
+const crafts=[["diy-wall-hanging.jpg","DIY wall hanging made out of waste","-1.8deg",""],["karambit.jpg","Call of Duty inspired karambit","1.2deg",""],["low-poly-parrot.jpg","Low poly parrot","-1deg",""]];
 $('#skGrid').innerHTML=crafts.map(([f,t,r,e])=>`<figure class="sk reveal" style="--r:${r}"><div class="ph">${e}<img src="${f}" alt="${t}" loading="lazy" onerror="this.remove()"></div><figcaption>${t}</figcaption></figure>`).join('');
 
 /* ---- hero name: letters pop in ---- */
@@ -116,6 +126,15 @@ if(matchMedia('(hover:hover)').matches&&!reduce){
 
 /* ---- theme toggle ---- */
 const root=document.documentElement,tb=$('#theme');
-function setTheme(m){root.dataset.theme=m;tb.textContent=m==='light'?'☀':'☾'}
+function setTheme(m){root.dataset.theme=m;tb.innerHTML=m==='light'?'<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M5 19l1.5-1.5M17.5 6.5L19 5"/></svg>':'<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>'}
 setTheme(matchMedia('(prefers-color-scheme:light)').matches?'light':'dark');
 tb.onclick=()=>setTheme(root.dataset.theme==='light'?'dark':'light');
+
+/* ---- copy email ---- */
+(()=>{const b=$('#copyMail'),t=$('#mailText').textContent;
+b.onclick=async()=>{
+  try{await navigator.clipboard.writeText(t)}
+  catch{const r=document.createRange();r.selectNodeContents($('#mailText'));const s=getSelection();s.removeAllRanges();s.addRange(r);document.execCommand('copy');s.removeAllRanges()}
+  b.textContent='Copied ✓';b.classList.add('done');
+  setTimeout(()=>{b.textContent='Copy';b.classList.remove('done')},1800);
+}})();
